@@ -10,6 +10,7 @@ namespace CS321_W5D2_BlogAPI.Core.Services
         Blog Update(Blog updatedBlog);
         Blog Get(int id);
         IEnumerable<Blog> GetAll();
+      //Should this be int id?? Or Blog blog??
         void Remove(int id);
     }
 }
