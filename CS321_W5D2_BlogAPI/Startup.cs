@@ -37,22 +37,39 @@ namespace CS321_W5D2_BlogAPI
 
             services.AddHttpContextAccessor();
 
-            // TODO: add your DbContext
+            // add your DbContext
+            services.AddDbContext<AppDbContext>();
+            // add identity services
+            services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+            // add JWT support
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(Options =>
+                {
+                    Options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                    };
+                });
 
-            // TODO: add identity services
-
-            // TODO: add JWT support
 
 
             services.AddScoped<IUserService, UserService>();
 
             // TODO: add the DbInititializer service
-
-            // TODO: add your repositories and services
-            //services.AddScoped<IBlogRepository, BlogRepository>();
-            //services.AddScoped<IPostRepository, PostRepository>();
-            //services.AddScoped<IBlogService, BlogService>();
-            //services.AddScoped<IPostService, PostService>();
+            //services.AddScoped<DbInitializer>();
+            // add your repositories and services
+            services.AddScoped<IBlogRepository, BlogRepository>();
+            services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<IBlogService, BlogService>();
+            services.AddScoped<IPostService, PostService>();
 
         }
 
@@ -94,7 +111,7 @@ namespace CS321_W5D2_BlogAPI
             });
 
             // TODO: add call to dbInitializer
-
+            //dbInitializer.Initialize();
         }
     }
 }

@@ -62,8 +62,8 @@ namespace CS321_W5D2_BlogAPI.Core.Services
         public Post Update(Post updatedPost)
         {
             // prevent user from updating a blog that isn't theirs
-            var currenUserId = _userService.CurrentUserId;
-            if(currenUserId != updatedPost.Blog.UserId)
+            var currentUserId = _userService.CurrentUserId;
+            if(currentUserId != updatedPost.Blog.UserId)
             {
                 throw new ApplicationException("You cannot update a post that does not belong to you!");
             }
