@@ -17,7 +17,7 @@ namespace CS321_W5D2_BlogAPI.Controllers
         private readonly IPostService _postService;
 
         // inject PostService
-        public PostsController(PostService postService)
+        public PostsController(IPostService postService)
         {
             _postService = postService;
         }
@@ -42,7 +42,7 @@ namespace CS321_W5D2_BlogAPI.Controllers
             }                       
         }
 
-        // TODO: get post by id
+        // get post by id
         // allow anyone to get, even if not logged in
         // GET api/blogs/{blogId}/posts/{postId}
         [AllowAnonymous]
@@ -98,7 +98,7 @@ namespace CS321_W5D2_BlogAPI.Controllers
         // TODO: delete post by id
         // DELETE /api/blogs/{blogId}/posts/{postId}
         [HttpDelete("/api/blogs/{blogId}/posts/{postId}")]
-        public IActionResult Delete(int blogId, int postId)
+        public IActionResult Delete(int postId)
         {
             try
             {

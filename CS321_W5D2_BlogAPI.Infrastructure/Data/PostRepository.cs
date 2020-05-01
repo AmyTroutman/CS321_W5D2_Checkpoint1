@@ -58,19 +58,14 @@ namespace CS321_W5D2_BlogAPI.Infrastructure.Data
 
         public IEnumerable<Post> GetAll()
         {
-            // TODO: get all posts
+            // get all posts
             return _dbContext.Posts
-                /*
-                 * What all do I need to include?
-                 * .Include(p => p.Blog.Name)
-                 * .Include(p => p.Blog.User)
-                */
-                .ToList();
+                 .Include(p => p.Blog.Name)
+                 .ToList();
         }
 
         public void Remove(int id)
         {
-            // TODO: remove Post
             _dbContext.Remove(id);
             _dbContext.SaveChanges();
         }

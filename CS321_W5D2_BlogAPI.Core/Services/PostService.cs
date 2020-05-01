@@ -24,7 +24,8 @@ namespace CS321_W5D2_BlogAPI.Core.Services
             // You may have to retrieve the blog in order to check user id
             // assign the current date to DatePublished
             var currentUserId = _userService.CurrentUserId;
-            if(currentUserId != newPost.Blog.UserId) //todo: is this correct?
+            var blog = _blogRepository.Get(newPost.BlogId);
+            if(currentUserId != blog.UserId)
             {
                 throw new ApplicationException("You are not allowed to add a post to a blog that does not belong to you!");
             }
@@ -49,6 +50,7 @@ namespace CS321_W5D2_BlogAPI.Core.Services
 
         public void Remove(int id)
         {
+            //todo: Something wrong
             var post = this.Get(id);
             var currentUserId = _userService.CurrentUserId;
             // prevent user from deleting from a blog that isn't theirs

@@ -21,7 +21,7 @@ namespace CS321_W5D2_BlogAPI.Infrastructure.Data
         {
             // Retrieve all blogs. Include Blog.User.
             return _dbContext.Blogs
-                .Include(b => b.Name)
+                .Include(b => b.Posts)
                 .Include(b => b.User)
                 .ToList();
         }
@@ -30,7 +30,7 @@ namespace CS321_W5D2_BlogAPI.Infrastructure.Data
         {
             // Retrieve the blog by id. Include Blog.User.
             return _dbContext.Blogs
-                .Include(b => b.Name)
+                .Include(b => b.Posts)
                 .Include(b => b.User)
                 .SingleOrDefault(b => b.Id == id);
         }

@@ -19,7 +19,7 @@ namespace CS321_W5D2_BlogAPI.Controllers
         private readonly IBlogService _blogService;
 
         //  inject BlogService
-        public BlogsController(BlogService blogService)
+        public BlogsController(IBlogService blogService)
         {
             _blogService = blogService;
         }
