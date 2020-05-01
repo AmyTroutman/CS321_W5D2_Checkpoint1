@@ -66,8 +66,14 @@ namespace CS321_W5D2_BlogAPI.Infrastructure.Data
 
         public void Remove(int id)
         {
-            _dbContext.Remove(id);
-            _dbContext.SaveChanges();
+            Post post = _dbContext.Posts.Find(id);
+            if (post != null)
+            {
+                _dbContext.Remove(post);
+                _dbContext.SaveChanges();
+            }
+
+            
         }
 
     }

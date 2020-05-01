@@ -98,12 +98,12 @@ namespace CS321_W5D2_BlogAPI.Controllers
         // TODO: delete post by id
         // DELETE /api/blogs/{blogId}/posts/{postId}
         [HttpDelete("/api/blogs/{blogId}/posts/{postId}")]
-        public IActionResult Delete(int postId)
+        public IActionResult Delete(int blogId, int postId)
         {
             try
             {
                 _postService.Remove(postId);
-                return Ok();
+                return Ok(_postService.Get(blogId));
             }
             catch (Exception ex)
             {
